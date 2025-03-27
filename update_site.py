@@ -142,6 +142,7 @@ if __name__ == "__main__":
             data = [{column: (entry.get(column, "") or "") for column in columns} for entry in api_monitor.db["data"][category].values() if matches_regex(agency, entry.get("agency"))]
             for i, entry in enumerate(data):
                 for key in entry.keys():
+                    data[i][key] = data[i][key].replace("\n", " ").replace("\r", " ")
                     if key in columns_dollar:
                         try:
                             data[i][key] = format_dollar_amount(data[i][key])
